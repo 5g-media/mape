@@ -1,0 +1,65 @@
+version: "3.6"
+services:
+  redis:
+    image: redis:${REDIS_IMAGE_TAG-latest}
+    container_name: ${REDIS_CONTAINER_NAME}
+    ports:
+    - "${REDIS_PORT}:6379"
+    env_file: .env
+    networks:
+      mape-network:
+        ipv4_address: ${REDIS_IP}
+    volumes:
+    - redis:/var/lib/redis
+    restart: unless-stopped
+
+  translator:
+    image: monitoring-data-translator:${TRANSLATOR_IMAGE_TAG-latest}
+    container_name: ${TRANSLATOR_CONTAINER_NAME}
+    ports:
+    - "${TRANSLATOR_PORT}:3333"
+    env_file: .env
+    networks:
+      mape-network:
+        ipv4_address: ${TRANSLATOR_IP}
+    external_links:
+    - ${KAFKA_CONTAINER_NAME}
+    restart: unless-stopped
+
+  ns-manager:
+    image: ns_manager:${NS_MANAGER_IMAGE_TAG-latest}
+    container_name: ${NS_MANAGER_CONTAINER_NAME}
+    ports:
+    - "${NS_MANAGER_PORT}:3333"
+    env_file: .env
+    depends_on:
+    - redis
+    networks:
+      mape-network:
+        ipv4_address: ${NS_MANAGER_IP}
+    restart: unless-stopped
+
+  resource-recommendations:
+    image: svp-resource-recommendations:${SVP_RESOURCE_RECOMMENDATIONS_IMAGE_TAG-latest}
+    container_name: ${SVP_RESOURCE_RECOMMENDATIONS_CONTAINER_NAME}
+    ports:
+    - "${SVP_RESOURCE_RECOMMENDATIONS_PORT}:3333"
+    env_file: .env
+    networks:
+      mape-network:
+        ipv4_address: ${SVP_RESOURCE_RECOMMENDATIONS_IP}
+    depends_on:
+    - influxdb
+    restart: unless-stopped
+
+volumes:
+  redis:
+
+networks:
+  mape-network:
+    driver: bridge
+    driver_opts:
+      com.docker.network.driver.mtu: 1400
+    ipam:
+      config:
+      - subnet: 172.19.0.0/16

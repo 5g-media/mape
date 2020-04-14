@@ -1,0 +1,164 @@
+version: "3.6"
+services:
+  influxdb:
+    image: influxdb:${INFLUXDB_IMAGE_TAG-latest}
+    container_name: ${INFLUXDB_CONTAINER_NAME}
+    ports:
+    - "${INFLUXDB_PORT}:8086"
+    env_file: .env
+    environment:
+    - INFLUXDB_DB=${INFLUXDB_DB_NAME}
+    networks:
+      mape-network:
+        ipv4_address: ${INFLUXDB_IP}
+    volumes:
+    - influxdb:/var/lib/influxdb
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:${GRAFANA_IMAGE_TAG-latest}
+    container_name: ${GRAFANA_CONTAINER_NAME}
+    ports:
+    - "${GRAFANA_PORT}:3000"
+    env_file: .env
+    networks:
+      mape-network:
+        ipv4_address: ${GRAFANA_IP}
+    depends_on:
+    - influxdb
+    volumes:
+    - grafana:/var/lib/grafana
+    restart: unless-stopped
+
+  redis:
+    image: redis:${REDIS_IMAGE_TAG-latest}
+    container_name: ${REDIS_CONTAINER_NAME}
+    ports:
+    - "${REDIS_PORT}:6379"
+    env_file: .env
+    networks:
+      mape-network:
+        ipv4_address: ${REDIS_IP}
+    volumes:
+    - redis:/var/lib/redis
+    restart: unless-stopped
+
+  kafka-manager:
+    image: sheepkiller/kafka-manager:${KAFKA_MANAGER_IMAGE_TAG-latest}
+    container_name: ${KAFKA_MANAGER_CONTAINER_NAME}
+    ports:
+    - "${KAFKA_MANAGER_PORT}:9000"
+    environment:
+    - ZK_HOSTS=${ZOOKEEPER_HOSTS}
+    networks:
+      mape-network:
+        ipv4_address: ${KAFKA_MANAGER_IP}
+    external_links:
+    - ${KAFKA_CONTAINER_NAME}
+    restart: unless-stopped
+
+  ceilometer-kafka-publisher:
+    image: ceilometer_kafka_publisher:${CEILOMETER_PUBLISHER_IMAGE_TAG-latest}
+    container_name: ${CEILOMETER_PUBLISHER_CONTAINER_NAME}
+    ports:
+    - "${CEILOMETER_PUBLISHER_PORT}:10000/udp"
+    env_file: .env
+    networks:
+      mape-network:
+        ipv4_address: ${CEILOMETER_PUBLISHER_IP}
+    external_links:
+    - ${KAFKA_CONTAINER_NAME}
+    restart: unless-stopped
+
+  translator:
+    image: monitoring-data-translator:${TRANSLATOR_IMAGE_TAG-latest}
+    container_name: ${TRANSLATOR_CONTAINER_NAME}
+    ports:
+    - "${TRANSLATOR_PORT}:3333"
+    env_file: .env
+    networks:
+      mape-network:
+        ipv4_address: ${TRANSLATOR_IP}
+    external_links:
+    - ${KAFKA_CONTAINER_NAME}
+    restart: unless-stopped
+
+  kafka-influx:
+    image: kafka-influx:${KAFKA_INFLUXDB_IMAGE_TAG-latest}
+    container_name: ${KAFKA_INFLUXDB_CONTAINER_NAME}
+    ports:
+    - "${KAFKA_INFLUXDB_PORT}:3333"
+    env_file: .env
+    depends_on:
+    - influxdb
+    networks:
+      mape-network:
+        ipv4_address: ${KAFKA_INFLUXDB_IP}
+    external_links:
+    - ${KAFKA_CONTAINER_NAME}s
+    restart: unless-stopped
+
+  ns-manager:
+    image: ns_manager:${NS_MANAGER_IMAGE_TAG-latest}
+    container_name: ${NS_MANAGER_CONTAINER_NAME}
+    ports:
+    - "${NS_MANAGER_PORT}:3333"
+    env_file: .env
+    depends_on:
+    - influxdb
+    - redis
+    networks:
+      mape-network:
+        ipv4_address: ${NS_MANAGER_IP}
+    restart: unless-stopped
+
+  actions-executor:
+    image: actions-execution-engine:${EXECUTOR_IMAGE_TAG-latest}
+    container_name: ${EXECUTOR_CONTAINER_NAME}
+    ports:
+    - "${EXECUTOR_PORT}:3333"
+    env_file: .env
+    networks:
+      mape-network:
+        ipv4_address: ${EXECUTOR_IP}
+    external_links:
+    - ${KAFKA_CONTAINER_NAME}
+    restart: unless-stopped
+
+  unikernels-kafka-publisher:
+    image: jolokia-kafka-exporter:${UNIKERNELS_KAFKA_IMAGE_TAG-latest}
+    container_name: ${UNIKERNELS_KAFKA_CONTAINER_NAME}
+    env_file: .env
+    networks:
+      mape-network:
+        ipv4_address: ${UNIKERNELS_KAFKA_IP}
+    external_links:
+    - ${KAFKA_CONTAINER_NAME}
+    restart: unless-stopped
+
+  resource-recommendations:
+    image: svp-resource-recommendations:${SVP_RESOURCE_RECOMMENDATIONS_IMAGE_TAG-latest}
+    container_name: ${SVP_RESOURCE_RECOMMENDATIONS_CONTAINER_NAME}
+    ports:
+    - "${SVP_RESOURCE_RECOMMENDATIONS_PORT}:3333"
+    env_file: .env
+    networks:
+      mape-network:
+        ipv4_address: ${SVP_RESOURCE_RECOMMENDATIONS_IP}
+    depends_on:
+    - influxdb
+    restart: unless-stopped
+
+volumes:
+  influxdb:
+  redis:
+  grafana:
+
+networks:
+  mape-network:
+    driver: bridge
+    driver_opts:
+      com.docker.network.driver.mtu: 1400
+    ipam:
+      config:
+      - subnet: 172.19.0.0/16
