@@ -4,20 +4,20 @@
 
 The 5G-MEDIA MAPE service consists of a set of components:
 - translator
-- [redis](https://hub.docker.com/_/redis target="_blank") (cache)
+- [redis](https://hub.docker.com/_/redis) (cache)
 - data-importer
-- [influxdb](https://hub.docker.com/_/influxdb){:target="_blank"} (database)
-- [grafana](https://hub.docker.com/r/grafana/grafana){:target="_blank"} (dashboard)
+- [influxdb](https://hub.docker.com/_/influxdb) (database)
+- [grafana](https://hub.docker.com/r/grafana/grafana) (dashboard)
 - LCM data manager
 - optimization components
    * O-CNO
    * SS-CNO(s)
-- [executor](https://github.com/5g-media/mape-executor){:target="_blank"}
+- [executor](https://github.com/5g-media/mape-executor)
 - recommender
-- [grayload](https://hub.docker.com/r/graylog/graylog/){:target="_blank"} (loggin server)
-- [redmine](https://hub.docker.com/_/redmine){:target="_blank"} (issue tracking server)
+- [grayload](https://hub.docker.com/r/graylog/graylog/) (loggin server)
+- [redmine](https://hub.docker.com/_/redmine) (issue tracking server)
 
-The communication among various components is achieved through a publish/subscribe broker. The [Apache Kafka](https://kafka.apache.org/) has been selected. Use [this](https://github.com/wurstmeister/kafka-docker){:target="_blank"} repository to build the docker image including the kafka broker and zookeeper and deploy it as a container. Moreover, [Kafka manager](https://github.com/yahoo/CMAK){:target="_blank"} is used to visualize statistics for the kafka broker.
+The communication among various components is achieved through a publish/subscribe broker. The [Apache Kafka](https://kafka.apache.org/) has been selected. Use [this](https://github.com/wurstmeister/kafka-docker) repository to build the docker image including the kafka broker and zookeeper and deploy it as a container. Moreover, [Kafka manager](https://github.com/yahoo/CMAK) is used to visualize statistics for the kafka broker.
 
 Th deployment of the MAPE is done as a project using the `docker-compose`. A docker image is built for every component (unless it is available in a docker registry).
 
