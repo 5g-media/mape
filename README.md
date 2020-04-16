@@ -4,18 +4,18 @@
 
 The 5G-MEDIA MAPE service consists of a set of components:
 - [Translator](https://github.com/5g-media/mape-translation)
-- Cache ([Redis](https://hub.docker.com/_/redis)
+- Cache ([Redis](https://hub.docker.com/_/redis) has been used)
 - Data-importer
-- Database ([InfluxDB](https://hub.docker.com/_/influxdb))
-- Dashboard ([Grafana](https://hub.docker.com/r/grafana/grafana)
+- Database ([InfluxDB](https://hub.docker.com/_/influxdb) has been used)
+- Dashboard ([Grafana](https://hub.docker.com/r/grafana/grafana) has been used)
 - LCM data manager
 - [Accounting agent](https://github.com/5g-media/accounting-agent)
 - Optimization components
    * [O-CNO-predictive-optimizer](https://github.com/5g-media/CNO/tree/master/O-CNO-predictive-optimizer)
    * [O-CNO-arbitrator](https://github.com/5g-media/CNO/tree/master/O-CNO)
-   * SS-CNO for tele-immesrive games (UC1)
+   * SS-CNO for Tele-Immesrive games (UC1)
    * [SS-CNO](https://github.com/5g-media/CNO/tree/master/SS-CNO-UC2-MC) for Mobile Contribution (UC2)
-   * [SS-CNO](https://github.com/5g-media/cno-rl) for remote and smart Production using reinforcement learning (UC2)
+   * [SS-CNO](https://github.com/5g-media/cno-rl) for Remote and Smart Production based on reinforcement learning (UC2)
    * [SS-CNO](https://github.com/5g-media/ss-cno-anomaly-detection-dl) for anomaly detection over vCDN services based on deeplearning (UC3)
    * [SS-CNO](https://github.com/5g-media/CNO/tree/master/SS-CNO-UC3) for anomaly detection over vCDN services based on supervised learning (UC3)
 - [Executor](https://github.com/5g-media/mape-executor)
