@@ -19,7 +19,7 @@ The 5G-MEDIA MAPE service consists of a set of components:
    * [SS-CNO](https://github.com/5g-media/ss-cno-anomaly-detection-dl) for anomaly detection over vCDN services based on deeplearning (UC3)
    * [SS-CNO](https://github.com/5g-media/CNO/tree/master/SS-CNO-UC3) for anomaly detection over vCDN services based on supervised learning (UC3)
 - [Executor](https://github.com/5g-media/mape-executor)
-- Recommender
+- [Recommender](https://github.com/5g-media/mape-recommender)
 - Logging server ([Grayload](https://hub.docker.com/r/graylog/graylog/) has been used)
 - Issue tracking server ([Redmine](https://hub.docker.com/_/redmine) has been used)
 
