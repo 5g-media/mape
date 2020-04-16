@@ -9,7 +9,7 @@ The 5G-MEDIA MAPE service consists of a set of components:
 - [influxdb](https://hub.docker.com/_/influxdb) (database)
 - [grafana](https://hub.docker.com/r/grafana/grafana) (dashboard)
 - LCM data manager
-- accounting agent
+- [accounting agent](https://github.com/5g-media/accounting-agent)
 - optimization components
    * O-CNO
    * SS-CNO(s)
