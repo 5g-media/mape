@@ -21,7 +21,7 @@ The 5G-MEDIA MAPE service consists of a set of components:
 - Optimization components
    * [O-CNO-predictive-optimizer](https://github.com/5g-media/CNO/tree/master/O-CNO-predictive-optimizer)
    * [O-CNO-arbitrator](https://github.com/5g-media/CNO/tree/master/O-CNO)
-   * [SS-CNO](https://github.com/5g-media/ss-cno-teleimmersive-game) for Tele-Immesrive games (UC1)
+   * [SS-CNO](https://github.com/5g-media/ss-cno-teleimmersive-game) for Tele-Immesrive games based on reinforcement learning (UC1)
    * [SS-CNO](https://github.com/5g-media/CNO/tree/master/SS-CNO-UC2-MC) for Mobile Contribution (UC2)
    * [SS-CNO](https://github.com/5g-media/cno-rl) for Remote and Smart Production based on reinforcement learning (UC2)
    * [SS-CNO](https://github.com/5g-media/ss-cno-anomaly-detection-dl) for anomaly detection over vCDN services based on deeplearning (UC3)
