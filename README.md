@@ -3,20 +3,25 @@
 ## Introduction
 
 The 5G-MEDIA MAPE service consists of a set of components:
-- [translator](https://github.com/5g-media/mape-translation)
-- [redis](https://hub.docker.com/_/redis) (cache)
-- data-importer
-- [influxdb](https://hub.docker.com/_/influxdb) (database)
-- [grafana](https://hub.docker.com/r/grafana/grafana) (dashboard)
+- [Translator](https://github.com/5g-media/mape-translation)
+- [Redis](https://hub.docker.com/_/redis) (cache)
+- Data-importer
+- [InfluxDB](https://hub.docker.com/_/influxdb) (database)
+- [Grafana](https://hub.docker.com/r/grafana/grafana) (dashboard)
 - LCM data manager
-- [accounting agent](https://github.com/5g-media/accounting-agent)
-- optimization components
-   * O-CNO
-   * SS-CNO(s)
-- [executor](https://github.com/5g-media/mape-executor)
-- recommender
-- [grayload](https://hub.docker.com/r/graylog/graylog/) (loggin server)
-- [redmine](https://hub.docker.com/_/redmine) (issue tracking server)
+- [Accounting agent](https://github.com/5g-media/accounting-agent)
+- Optimization components
+   * [O-CNO-predictive-optimizer](https://github.com/5g-media/CNO/tree/master/O-CNO-predictive-optimizer)
+   * [O-CNO-arbitrator](https://github.com/5g-media/CNO/tree/master/O-CNO)
+   * SS-CNO for tele-immesrive games (UC1)
+   * [SS-CNO](https://github.com/5g-media/CNO/tree/master/SS-CNO-UC2-MC) for Mobile Contribution (UC2)
+   * [SS-CNO](https://github.com/5g-media/cno-rl) for remote and smart Production using reinforcement learning (UC2)
+   * [SS-CNO](https://github.com/5g-media/ss-cno-anomaly-detection-dl) for anomaly detection over vCDN services based on deeplearning (UC3)
+   * [SS-CNO](https://github.com/5g-media/CNO/tree/master/SS-CNO-UC3) for anomaly detection over vCDN services based on supervised learning (UC3)
+- [Executor](https://github.com/5g-media/mape-executor)
+- Recommender
+- [Grayload](https://hub.docker.com/r/graylog/graylog/) (logging server)
+- [Redmine](https://hub.docker.com/_/redmine) (issue tracking server)
 
 The communication among various components is achieved through a publish/subscribe broker. The [Apache Kafka](https://kafka.apache.org/) has been selected. Use [this](https://github.com/wurstmeister/kafka-docker) repository to build the docker image including the kafka broker and zookeeper and deploy it as a container. Moreover, [Kafka manager](https://github.com/yahoo/CMAK) is used to visualize statistics for the kafka broker.
 
