@@ -3,7 +3,7 @@
 ## Introduction
 
 The 5G-MEDIA MAPE service consists of a set of components:
-- translator
+- [translator](https://github.com/5g-media/mape-translation)
 - [redis](https://hub.docker.com/_/redis) (cache)
 - data-importer
 - [influxdb](https://hub.docker.com/_/influxdb) (database)
