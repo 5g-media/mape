@@ -4,10 +4,10 @@
 
 The 5G-MEDIA MAPE service consists of a set of components:
 - [Translator](https://github.com/5g-media/mape-translation)
-- [Redis](https://hub.docker.com/_/redis) (cache)
+- Cache ([Redis](https://hub.docker.com/_/redis)
 - Data-importer
-- [InfluxDB](https://hub.docker.com/_/influxdb) (database)
-- [Grafana](https://hub.docker.com/r/grafana/grafana) (dashboard)
+- Database ([InfluxDB](https://hub.docker.com/_/influxdb))
+- Dashboard ([Grafana](https://hub.docker.com/r/grafana/grafana)
 - LCM data manager
 - [Accounting agent](https://github.com/5g-media/accounting-agent)
 - Optimization components
@@ -20,8 +20,8 @@ The 5G-MEDIA MAPE service consists of a set of components:
    * [SS-CNO](https://github.com/5g-media/CNO/tree/master/SS-CNO-UC3) for anomaly detection over vCDN services based on supervised learning (UC3)
 - [Executor](https://github.com/5g-media/mape-executor)
 - Recommender
-- [Grayload](https://hub.docker.com/r/graylog/graylog/) (logging server)
-- [Redmine](https://hub.docker.com/_/redmine) (issue tracking server)
+- Logging server ([Grayload](https://hub.docker.com/r/graylog/graylog/) has been used)
+- Issue tracking server ([Redmine](https://hub.docker.com/_/redmine) has been used)
 
 The communication among various components is achieved through a publish/subscribe broker. The [Apache Kafka](https://kafka.apache.org/) has been selected. Use [this](https://github.com/wurstmeister/kafka-docker) repository to build the docker image including the kafka broker and zookeeper and deploy it as a container. Moreover, [Kafka manager](https://github.com/yahoo/CMAK) is used to visualize statistics for the kafka broker.
 
