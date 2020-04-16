@@ -119,15 +119,14 @@ Docker version 18.03.0-ce, build 0520e24
 ```
 
 ## Authors
-- Athanasoulis Takis <pathanasoulis@ep.singularlogic.eu>
+- Singular Logic <pathanasoulis@ep.singularlogic.eu>
+- UCL
 
 ## Contributors
  - Contact with Authors
  
 ## Acknowledgements
-This project has received funding from the European Union’s Horizon 2020 research and innovation 
-programme under grant agreement *No 761699*. The dissemination of results herein reflects only 
-the author’s view and the European Commission is not responsible for any use that may be made 
+This project has received funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement *No 761699*. The dissemination of results herein reflects only the author’s view and the European Commission is not responsible for any use that may be made 
 of the information it contains.
 
 ## License
