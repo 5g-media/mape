@@ -5,7 +5,7 @@
 The 5G-MEDIA MAPE service consists of a set of components:
 - [Translator](https://github.com/5g-media/mape-translation)
 - Cache ([Redis](https://hub.docker.com/_/redis) has been used)
-- Data-importer
+- [Data-importer](https://github.com/5g-media/mape-data-importer)
 - Database ([InfluxDB](https://hub.docker.com/_/influxdb) has been used)
 - Dashboard ([Grafana](https://hub.docker.com/r/grafana/grafana) has been used)
 - LCM data manager
