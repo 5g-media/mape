@@ -38,11 +38,17 @@ The NFVI monitoring data are sent in the publish/subscribe broker through the be
 - [Kubernetes-kafka-publisher](https://github.com/5g-media/kubernetes-prometheus-publisher)
 - [OpenNebula-kafka-publisher](https://github.com/5g-media/opennebula-kafka-publisher)
 
-
 The deployment of the MAPE is done as a project using the `docker-compose`. A docker image is built for every component (unless it is available in a docker registry).
 
+The structure of this repository is:
+![deployment-files](figures/tree.JPG)
 
-## Usage
+- The deployment folder includes the deployment and configuration files.
+- The scripts folder includes various bash script files.
+- The figures folder includes the figures of the repository.
+
+
+## Deployment
 
 Deploy the services:
 ```bash
