@@ -31,12 +31,12 @@ The 5G-MEDIA MAPE service consists of a set of components:
 - Logging server ([Grayload](https://hub.docker.com/r/graylog/graylog/) has been used)
 - Issue tracking server ([Redmine](https://hub.docker.com/_/redmine) has been used)
 
-The communication and the messages exchange among the above components is achieved through teh 5G-MEDIA publish/subscribe broker. The [Apache Kafka](https://kafka.apache.org/) has been selected as publish/subscribe broker. Follow the instructions of the [repository](https://github.com/wurstmeister/kafka-docker) to build the docker image including the kafka broker / zookeeper and deploy it through the docker-compose. Moreover, [Kafka manager](https://github.com/yahoo/CMAK) is used to visualize statistics for the kafka broker.
+The communication and the messages exchange among the above components is achieved through the 5G-MEDIA publish/subscribe broker. The [Apache Kafka](https://kafka.apache.org/) has been selected as publish/subscribe broker. Follow the instructions of the [repository](https://github.com/wurstmeister/kafka-docker) to build the docker image including the kafka broker / zookeeper and deploy it through the docker-compose. Moreover, [Kafka manager](https://github.com/yahoo/CMAK) is used to visualize statistics for the kafka broker.
 
 The NFVI monitoring data are sent in the publish/subscribe broker through the below three publishers and then are processed by the Translator:
 - [OpenStack-kafka-publisher](https://github.com/5g-media/openstack-kafka-publisher)
 - [Kubernetes-kafka-publisher](https://github.com/5g-media/kubernetes-prometheus-publisher)
-- [OpenEnbula-kafka-publisher](https://github.com/5g-media/opennebula-kafka-publisher)
+- [OpenNebula-kafka-publisher](https://github.com/5g-media/opennebula-kafka-publisher)
 
 
 The deployment of the MAPE is done as a project using the `docker-compose`. A docker image is built for every component (unless it is available in a docker registry).
@@ -51,7 +51,7 @@ $ sudo docker-compose -f docker-compose-mape.yml up -d
 
 Deploy the services with multiple translator instances. Indicative example:
 ```bash
-sudo docker-compose -f docker-compose-mape-ncsrd.yml up -d --scale translator=3
+$ sudo docker-compose -f docker-compose-mape-ncsrd.yml up -d --scale translator=3
 ```
 
 List of the docker container including the healthcheck label:

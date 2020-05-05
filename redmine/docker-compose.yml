@@ -1,0 +1,25 @@
+version: '3.6'
+services:
+  redmine:
+    image: redmine:${REDMINE_TAG-4.0-alpine}
+    env_file: .env
+    environment:
+      REDMINE_DB_MYSQL: mysql
+      REDMINE_DB_USERNAME: ${REDMINE_DB_USERNAME}
+      REDMINE_DB_PASSWORD: ${REDMINE_DB_PASSWORD}
+    volumes:
+      - redmine_mysql:/var/lib/mysql
+    restart: unless-stopped
+    ports:
+      - ${REDMINE_PORT}:3000
+
+  mysql:
+    image: mysql:${MYSQL_TAG-5.7}
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${REDMINE_DB_PASSWORD}
+      MYSQL_DATABASE: redmine
+
+volumes:
+  redmine_mysql:
